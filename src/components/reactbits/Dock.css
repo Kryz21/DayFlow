@@ -1,0 +1,224 @@
+.dock-outer {
+  position: fixed;
+  left: 50%;
+  bottom: 1.05rem;
+  transform: translateX(-50%);
+  z-index: 80;
+  margin: 0;
+  display: flex;
+  width: min(calc(100vw - 1.25rem), 650px);
+  max-width: 100%;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.dock-panel {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: fit-content;
+  max-width: 100%;
+  gap: 0.82rem;
+  border-radius: 1.65rem;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.18), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.045)),
+    rgba(8, 8, 11, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 28px 90px rgba(0, 0, 0, 0.58),
+    0 0 42px rgba(255, 255, 255, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  padding: 0 0.7rem 0.68rem;
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+  pointer-events: auto;
+}
+
+.dock-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0.34rem;
+  border-radius: 1.25rem;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.dock-panel::after {
+  content: '';
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: -0.55rem;
+  height: 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  filter: blur(22px);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.dock-item {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  color: rgba(255, 255, 255, 0.74);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.16), transparent 55%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.035)),
+    rgba(17, 17, 21, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.105);
+  box-shadow:
+    0 15px 28px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.13);
+  cursor: pointer;
+  outline: none;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.dock-item::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  z-index: -1;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.dock-glow {
+  position: absolute;
+  inset: -8px;
+  z-index: -2;
+  border-radius: inherit;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.22), transparent 64%);
+  filter: blur(14px);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.dock-item:hover,
+.dock-item:focus-visible {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.26);
+  box-shadow:
+    0 20px 44px rgba(0, 0, 0, 0.44),
+    0 0 30px rgba(255, 255, 255, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.dock-item:hover::before,
+.dock-item:focus-visible::before,
+.dock-item:hover .dock-glow,
+.dock-item:focus-visible .dock-glow {
+  opacity: 1;
+}
+
+.dock-item-active {
+  color: #06070a;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 1), transparent 58%),
+    linear-gradient(180deg, #ffffff, #c9ced8 58%, #a6abb5);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 18px 48px rgba(255, 255, 255, 0.13),
+    0 12px 30px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.22);
+}
+
+.dock-item-active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -0.56rem;
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 999px;
+  transform: translateX(-50%);
+  background: #ffffff;
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.08),
+    0 0 18px rgba(255, 255, 255, 0.75);
+}
+
+.dock-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dock-label {
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+  width: fit-content;
+  white-space: pre;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
+    rgba(8, 8, 11, 0.92);
+  padding: 0.32rem 0.74rem;
+  font-size: 0.74rem;
+  letter-spacing: -0.01em;
+  color: #fff;
+  transform: translateX(-50%);
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.46),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.light .dock-panel {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.96), transparent 44%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.62)),
+    rgba(240, 242, 247, 0.84);
+  border-color: rgba(10, 20, 35, 0.1);
+  box-shadow:
+    0 28px 80px rgba(15, 23, 42, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.light .dock-item {
+  color: rgba(18, 24, 35, 0.72);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.95), transparent 54%),
+    rgba(255, 255, 255, 0.76);
+  border-color: rgba(10, 20, 35, 0.08);
+}
+
+.light .dock-item-active {
+  color: white;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.24), transparent 58%),
+    linear-gradient(180deg, #20232b, #050507);
+}
+
+@media (max-width: 640px) {
+  .dock-outer {
+    bottom: 0.72rem;
+  }
+
+  .dock-panel {
+    gap: 0.44rem;
+    border-radius: 1.25rem;
+    padding: 0 0.46rem 0.46rem;
+  }
+
+  .dock-item {
+    border-radius: 15px;
+  }
+}

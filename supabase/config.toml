@@ -1,0 +1,4 @@
+project_id = "dayflow"
+
+[functions.generate-day-plan]
+verify_jwt = true
